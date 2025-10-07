@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9A1 Quiz – Flashcard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-effects"></div>
+    <div id="app-container">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">9A1 Quiz</a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+                    <li><a href="activities.html" class="nav-link">📚 Activities</a></li>
+                    <li><a href="flashcard.html" class="nav-link active">🃏 Flashcard</a></li>
+                </ul>
+                <div class="nav-auth">
+                    <div id="user-info" class="user-info hidden">
+                        <div class="avatar-container">
+                             <img src="" alt="User Avatar" id="user-avatar" class="avatar">
+                             <button id="edit-avatar-btn" class="edit-avatar-btn" title="Edit Avatar">✏️</button>
+                        </div>
+                        <span id="username-display"></span>
+                    </div>
+                    <button id="logout-btn" class="btn btn-logout hidden">Logout</button>
+                    <button id="login-btn" class="btn btn-secondary">Login</button>
+                    <button id="signup-btn" class="btn btn-primary">Sign Up</button>
+                </div>
+                 <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </header>
+
+        <main id="flashcard-page">
+            <div class="flashcard-container">
+                <!-- This container will hold the stacked cards -->
+                <div id="flashcard-deck-container">
+                    <!-- Cards will be injected here by script.js -->
+                </div>
+                <div class="flashcard-controls">
+                    <button id="prev-card" class="btn btn-secondary">Previous</button>
+                    <span id="card-counter">0 / 0</span>
+                    <button id="next-card" class="btn btn-secondary">Next</button>
+                </div>
+            </div>
+            <aside class="flashcard-panel">
+                <h2>Manage Cards</h2>
+                <form id="add-card-form">
+                    <div class="form-group">
+                        <label for="card-word">Word / Question</label>
+                        <input type="text" id="card-word" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-definition">Definition / Answer</label>
+                        <textarea id="card-definition" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Add Card</button>
+                </form>
+                <button id="reset-cards" class="btn btn-danger btn-full">Reset All Cards</button>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Auth Modal (for redirection cases) -->
+     <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="signup">Sign Up</button>
+            </div>
+            <form id="login-form" class="modal-form">
+                <h2>Please Login to Continue</h2>
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <p id="login-error" class="error-message"></p>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+            </form>
+            <form id="signup-form" class="modal-form hidden">
+                 <h2>Create an Account</h2>
+                <div class="form-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" required>
+                </div>
+                <div class="form-group">
+                    <label>Account Type</label>
+                    <div class="role-selector">
+                        <div class="role-option">
+                            <label for="role-student">Student</label>
+                            <input type="radio" id="role-student" name="role" value="student" checked>
+                        </div>
+                        <div class="role-option">
+                            <label for="role-teacher">Teacher</label>
+                            <input type="radio" id="role-teacher" name="role" value="teacher">
+                        </div>
+                    </div>
+                </div>
+                <div id="teacher-code-group" class="form-group hidden">
+                    <label for="teacher-code">Teacher Code</label>
+                    <input type="password" id="teacher-code" placeholder="Enter teacher code">
+                </div>
+                <div class="form-group">
+                    <label>Select Your Avatar</label>
+                    <div class="gender-selector">
+                        <label>
+                            <input type="radio" name="gender" value="male" checked>
+                            <div class="gender-option" id="gender-option-male">
+                                <img src="" alt="Male Avatar Preview" class="gender-avatar-preview">
+                                <span>Male</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female">
+                            <div class="gender-option" id="gender-option-female">
+                                <img src="" alt="Female Avatar Preview" class="gender-avatar-preview">
+                                <span>Female</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <p id="signup-error" class="error-message"></p>
+                <button type="submit" class="btn btn-primary btn-full">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    
+     <!-- Generic Modal for confirmations, etc. -->
+    <div id="generic-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-generic">&times;</button>
+            <div id="generic-modal-body">
+                <!-- Content dynamically inserted by script.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Gender Edit Modal -->
+    <div id="gender-edit-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-gender">&times;</button>
+            <form id="gender-edit-form">
+                <h2>Change Your Avatar</h2>
+                 <div class="form-group">
+                    <label>Select Your Avatar</label>
+                    <div class="gender-selector">
+                        <label>
+                            <input type="radio" name="edit-gender" value="male">
+                            <div class="gender-option" id="edit-gender-option-male">
+                                <img src="" alt="Male Avatar Preview" class="gender-avatar-preview">
+                                <span>Male</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input type="radio" name="edit-gender" value="female">
+                            <div class="gender-option" id="edit-gender-option-female">
+                                <img src="" alt="Female Avatar Preview" class="gender-avatar-preview">
+                                <span>Female</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

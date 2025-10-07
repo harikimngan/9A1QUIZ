@@ -1,0 +1,5 @@
+{
+  "name": "9A1 Quiz",
+  "description": "An educational gamified learning app inspired by Quizizz, allowing teachers to create quizzes and students to participate, with an additional flashcard feature for studying. All data is persisted using localStorage.",
+  "requestFramePermissions": []
+}
