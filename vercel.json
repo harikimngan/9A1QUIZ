@@ -1,14 +1,9 @@
 {
-  "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "activities.html", "use": "@vercel/static" },
-    { "src": "about.html", "use": "@vercel/static" },
-    { "src": "quiz.html", "use": "@vercel/static" }
-  ],
   "routes": [
-    { "src": "/activities", "dest": "/activities.html" },
+    { "src": "/(.*\\.(css|js|png|jpg|svg|ico))", "dest": "/$1" },
     { "src": "/about", "dest": "/about.html" },
-    { "src": "/quiz", "dest": "/quiz.html" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/activities", "dest": "/activities.html" },
+    { "src": "/flashcard", "dest": "/flashcard.html" },
+    { "src": "/", "dest": "/index.html" }
   ]
 }
