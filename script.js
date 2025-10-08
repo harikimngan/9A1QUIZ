@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- GLOBAL STATE & CONSTANTS ---
     const TEACHER_CODE = "TEACHER2025";
     const path = window.location.pathname.split("/").pop() || 'index.html';
-    const MALE_AVATAR = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48cGF0aCBmaWxsPSIjYzc3ZGZmIiBkPSJNMjI0IDExMnEtOC4zMyAwLTE0LjE3IDUuODN0LTUuODMgMTQuMTdxMCA4LjMzIDUuODMgMTQuMTd0MTQuMTcgNS44M3ExNi42NyAwIDI4LjMzLTEwLjQydDEzLjMzLTI1LjQycTAgLTE1LjgzLTEwLjQyLTI3LjA4dC0yNi4yNS0xMS4yNUwyMjQgOTZ2MTZabS0xMjIgMHEtOC4zMyAwLTE0LjE3IDUuODN0LTUuODMgMTQuMTdxMCA4LjMzIDUuODMgMTQuMTd0MTQuMTcgNS44M3E4LjMzIDAgMTQuMTctNS44M3Q1LjgzLTE0LjE3cS0xLjY3LTE2LjY3LTEzLjMzLTI2LjI1dC0yMC44My05LjU4Wk0xMjggMjRxLTE5LjI1IDAtMzUuMjUgOC4xMnQtMjguNjIgMjIuNS0xNy43NSAzMy43NVQ0MCAxMTZxMCAxMS42NyAyLjA4IDI0LjU4dDYuNjcgMjQuNzVxNC41OCAxMiA5Ljg3IDIxLjA0dDEwLjUgMTUuNzkgOS43MSAxMC4xNmE5NC4xNSA5NC4xNSAwIDAgMCAxOS4xNyAxMi4xN3ExNS41IDEwLjMzIDMyIDEwLjMzczMwLjUtMy40MiAzMi0xMC4zM2ExMDQuMyAxMDQuMyAwIDAgMCAxOS4xNy0xMi4xN3E0LjE2LTQuNSA5LjcxLTEwLjE2dDEwLjUtMTUuNzlxNS4yOS05LjA0IDkuODctMjEuMDR0Ni42Ny0yNC43NVEyMTYgMTI3LjY3IDIxNiAxMTZxMC0xNS41LTUuMzgtMzAuMDgtNS4zNy0xNC41OS0xMy41NC0yNS4xN3EtOC4xNi0xMC41OC0xOC40MS0xNy41NC0xMC4yNi02Ljk2LTIyLjA5LTEwLjYxUTEzOS41IDI0IDEyOCAyNFoiLz48L3N2Zz4=`;
-    const FEMALE_AVATAR = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48cGF0aCBmaWxsPSIjYzc3ZGZmIiBkPSJNMjQyLjUgNjQuMjVxLTYuMjUgMi41LTEzLjQ2IDQuMDgtNy4yIDEuNTgtMTMuOCA1LjA0LTE1LjI1IDguMjUtMjIgMjRxMCA4LjMzIDUuODMgMTQuMTd0MTQuMTcgNS44M3E4LjMzIDAgMTQuMTctNS44M3Q1LjgzLTE0LjE3cTAtOC4yNS0zLjUtMTQuNzV0LTguNzUtMTAuMjVxMCAxLjY3LS4yOSA0LjU4LS4zIDIgLjU0IDQuNDJxLjg0IDIuNDIgMi4wOCA2LjVxMyA5LjMzIDMuNSA5LjgzdjFxMCAuNjctLjI5IDEuNDZ0LS43MSAxLjIxcS0yLjA4IDMuMzMtNC4zMyA1LjY3bC0zLjI1IDMuMjVxLTUuODMgNS44My0xMi45MiA1LjgzcS0xLjY3IDAtMy4yNS0uNXQtMy4yNS0xLjVxMCAuNjctLjI1IDEuNjdxLS4yNSAxLS41IDEuNzVxLTEuMjUgMy4zMy00LjQyIDUuNjJxLTcgNS4yNS0xNi4xMiA1LjI1bC0yLjUtLjI1cS0xMC40Mi0xLjI1LTE3LjA4LTkuNzVxLTQgMy43NS0xMC4yNSA4LjQydC0xMy4yNSA5LjQycS03IDQuNzUtMTIgNC43NXQtMTIgNC43NXEtOC4zMyAxLjY3LTEyLjc1IDRxLTMuMzMgMy43NS05LjA4IDYuMzd0LTExLjg4IDMuNDJRLTg4IDE4NCA4MCAxODRxLTguMzMgMC0xNC4xNy01LjgzVDUwIDE2NHEwLTguMzMgNS44My0xNC4xN1Q3MCAxNDZxOC4zMyAwIDE0LjE3IDUuODNUNTAgMTY0cTAgMy4zMy0uNSA4LjVxLS41IDUuMTcgMS41IDEyLjVxMiA3LjMzIDYuMjUgMTQuNDZ0OS41OCAxMS41NFE3MiAyMDYgNzkgMjA2cTEuNjcgMCAzLjA4LS43MXQyLjY3LTEuNzlRMzIgMTc2IDI0IDE0OHEwLTE5LjI1IDguMTItMzUuMjV0MjIuNS0yOC42MiAyMy43NS0xNy43NVE4OS43NSA2NCA5NiA2NHE4LjMzIDAgMTQuNzUgMi4yMSAxMC40MiAzLjU0IDE4LjE3IDkuMTcgNy43NSA1LjYzIDExLjg4IDEwLjg4IDQuMTIgNS4yNSA1LjYyIDguNjJxMS41IDMuMzggMS41IDUuNjIgMCAxLjY3LS4yOSA0LjA4VDE0OCA5MHEwIDguMzMgNS44MyAxNC4xN1QxNjggMTIwcTguMzMgMCAxNC4xNy01LjgzVDE4OCAxMDBxMC0xNS0xMC0yNi41VDE1MS41IDY0cTguMzMtMTMuMzMgMTkuMTctMjV0MjIuMzMtMTQuNXEyLjA4LTEuMjUgNC4wOC0xLjgzdDMuOTItLjg4cTMuMzMgMCA1LjYyIDEuMTJ0My42MyAzLjM4cTEuMzggMi4yNSAxLjM4IDQuNjIgMCAxLjI1LS4yOSAzaC0uMjVxLTEuNjcgNy41LTQuMDggMTUuMjVxLTcgMjEuMjUtNyAyNS41WiIvPjwvc3ZnPg==`;
+    const MALE_AVATAR = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGZpbGw9IiNjNzdkZmYiIGQ9Ik00ODAtODBxLTEzNCAwLTIyNy05M3QtOTMtMjI3cTAtMTM0IDkzLTIyN3QyMjctOTNxMTM0IDAgMjI3IDkzdDkzIDIyN3EwIDEzNC05MyAyMjd0LTIyNyA5M1ptMC0zMjBxLTY2IDAtMTEzLTQ3dC00Ny0xMTNxMC02NiA0Ny0xMTN0MTEzLTQ3cTY2IDAgMTEzIDQ3dDQ3IDExM3EwIDY2LTQ3IDExM3QtMTEzIDQ3Wm0wIDI0MHE4MyAwIDE1Ni0zMS41VDc2My0zNDBxLTU0LTU0LTEyNy04M3QtMTU2LTI5cS04MyAwLTE1NiAyOXQtMTI3IDgzcTQ3IDYyIDEyMCA5My41VDQ4MC04MFoiLz48L3N2Zz4=`;
+    const FEMALE_AVATAR = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGZpbGw9IiNjNzdkZmYiIGQ9Ik00ODAtODBxLTEzNCAwLTIyNy05M3QtOTMtMjI3di04MHEwLTI1IDcuNS00Mi41VDMwLTYwdi0xMjBxMC0yNSAxNy41LTQyLjVUMzIwLTcyMGgzMjBxMjUgMCA0Mi41IDE3LjVUNzAwLTY2MHYxMjBoNDBxMjUgMCA0Mi41IDE3LjVUNDgwLTQ4MHY4MHEwIDEzNC05MyAyMjd0LTIyNyA5M1ptMC00ODBRLTY2IDAtMTEzLTQ3dC00Ny0xMTNxMC02NiA0Ny0xMTN0MTEzLTQ3cTY2IDAgMTEzIDQ3dDQ3IDExM3EwIDY2LTQ3IDExM3QtMTEzIDQ3WiIvPjwvc3ZnPg==`;
     
     // --- UTILITY FUNCTIONS ---
     const getFromLS = (key) => JSON.parse(localStorage.getItem(key));
@@ -177,13 +177,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const openGenderEditModal = () => {
         if (!currentUser) return;
-        const modal = document.getElementById('gender-edit-modal');
-        const maleRadio = document.getElementById('edit-gender-male');
-        const femaleRadio = document.getElementById('edit-gender-female');
+        const maleRadio = document.querySelector('#gender-edit-modal input[name="edit-gender"][value="male"]');
+        const femaleRadio = document.querySelector('#gender-edit-modal input[name="edit-gender"][value="female"]');
         
-        if (currentUser.gender === 'female') {
+        if (currentUser.gender === 'female' && femaleRadio) {
             femaleRadio.checked = true;
-        } else {
+        } else if (maleRadio) {
             maleRadio.checked = true;
         }
         openModal('gender-edit-modal');
@@ -191,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const handleGenderEdit = (e) => {
         e.preventDefault();
-        const newGender = document.querySelector('input[name="edit-gender"]:checked').value;
+        const newGender = document.querySelector('#gender-edit-form input[name="edit-gender"]:checked').value;
 
         // Update current session
         currentUser.gender = newGender;
@@ -258,6 +257,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     form.classList.toggle('hidden', form.id !== `${tab}-form`);
                 });
             });
+        });
+
+        // Populate gender avatar previews in all modals
+        document.querySelectorAll('.gender-selector').forEach(selector => {
+            const maleImg = selector.querySelector('img[alt="Male Avatar Preview"]');
+            const femaleImg = selector.querySelector('img[alt="Female Avatar Preview"]');
+            if(maleImg) maleImg.src = MALE_AVATAR;
+            if(femaleImg) femaleImg.src = FEMALE_AVATAR;
         });
     };
 
