@@ -1,8 +1,14 @@
 {
   "builds": [
-    { "src": "dist/**/*", "use": "@vercel/static" }
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "activities.html", "use": "@vercel/static" },
+    { "src": "about.html", "use": "@vercel/static" },
+    { "src": "quiz.html", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/dist/$1" }
+    { "src": "/activities", "dest": "/activities.html" },
+    { "src": "/about", "dest": "/about.html" },
+    { "src": "/quiz", "dest": "/quiz.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
