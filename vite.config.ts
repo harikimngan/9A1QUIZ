@@ -1,28 +1,42 @@
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
-// FIX: Import to define __dirname in ES module scope.
 import { fileURLToPath } from 'url';
 
-// FIX: Define __dirname for ES module scope to avoid type errors with process.cwd().
+// Định nghĩa __dirname cho ES module scope
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
-    const env = loadEnv(mode, '.', '');
-    return {
-      server: {
-        port: 3000,
-        host: '0.0.0.0',
+  const env = loadEnv(mode, '.', '');
+
+  return {
+    server: {
+      port: 3000,
+      host: '0.0.0.0',
+    },
+    plugins: [],
+    define: {
+      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
       },
-      plugins: [],
-      define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
-      },
-      resolve: {
-        alias: {
-          // FIX: Use ES module-compatible __dirname for path aliasing.
-          '@': path.resolve(__dirname, '.'),
+    },
+
+    // ⚙️ QUAN TRỌNG: phần này giúp build ra thư mục dist và link tĩnh chạy đúng
+    build: {
+      outDir: 'dist', // nơi chứa file build (Vercel sẽ deploy thư mục này)
+      emptyOutDir: true, // xoá dist cũ trước khi build lại
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+          activities: path.resolve(__dirname, 'activities.html'),
+          flashcard: path.resolve(__dirname, 'flashcard.html'),
+          about: path.resolve(__dirname, 'about.html'),
         }
       }
-    };
+    },
+    base: '/', // Changed to absolute path for clean URLs and routing
+  };
 });

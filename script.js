@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- GLOBAL STATE & CONSTANTS ---
     const TEACHER_CODE = "TEACHER2025";
-    const path = window.location.pathname.split("/").pop() || 'index.html';
+    const path = window.location.pathname;
     const MALE_AVATAR = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGZpbGw9IiNjNzdkZmYiIGQ9Ik00ODAtODBxLTEzNCAwLTIyNy05M3QtOTMtMjI3cTAtMTM0IDkzLTIyN3QyMjctOTNxMTM0IDAgMjI3IDkzdDkzIDIyN3EwIDEzNC05MyAyMjd0LTIyNyA5M1ptMC0zMjBxLTY2IDAtMTEzLTQ3dC00Ny0xMTNxMC02NiA0Ny0xMTN0MTEzLTQ3cTY2IDAgMTEzIDQ3dDQ3IDExM3EwIDY2LTQ3IDExM3QtMTEzIDQ3Wm0wIDI0MHE4MyAwIDE1Ni0zMS41VDc2My0zNDBxLTU0LTU0LTEyNy04M3QtMTU2LTI5cS04MyAwLTE1NiAyOXQtMTI3IDgzcTQ3IDYyIDEyMCA5My41VDQ4MC04MFoiLz48L3N2Zz4=`;
     const FEMALE_AVATAR = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGZpbGw9IiNjNzdkZmYiIGQ9Ik00ODAtODBxLTEzNCAwLTIyNy05M3QtOTMtMjI3di04MHEwLTI1IDcuNS00Mi41VDMwLTYwdi0xMjBxMC0yNSAxNy41LTQyLjVUMzIwLTcyMGgzMjBxMjUgMCA0Mi41IDE3LjVUNzAwLTY2MHYxMjBoNDBxMjUgMCA0Mi41IDE3LjVUNDgwLTQ4MHY4MHEwIDEzNC05MyAyMjd0LTIyNyA5M1ptMC00ODBRLTY2IDAtMTEzLTQ3dC00Ny0xMTNxMC02NiA0Ny0xMTN0MTEzLTQ3cTY2IDAgMTEzIDQ3dDQ3IDExM3EwIDY2LTQ3IDExM3QtMTEzIDQ3WiIvPjwvc3ZnPg==`;
     
@@ -76,7 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update active link
         document.querySelectorAll('.nav-link').forEach(link => {
             const linkPath = link.getAttribute('href');
-            if (linkPath === path) {
+            // Handle root path case for index.html
+            const isActive = (path === '/' && linkPath === '/') || (linkPath !== '/' && path.startsWith(linkPath));
+            if (isActive) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
@@ -87,8 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleLogout = () => {
         localStorage.removeItem('currentUser');
         currentUser = null;
-        if (path !== 'index.html') {
-            window.location.href = 'index.html';
+        if (path !== '/') {
+            window.location.href = '/';
         } else {
             updateNav();
             initHomePage(); // Re-render home page for logged-out state
@@ -111,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal('auth-modal');
             showToast(`Welcome back, ${user.username}!`, 'success');
             
-            if (path === 'activities.html' || path === 'flashcard.html') {
+            if (path === '/activities' || path === '/flashcard') {
                 window.location.reload();
             } else {
                  updateNav();
@@ -286,8 +288,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h1>9A1 Quiz</h1>
                 <p>Learn. Play. Compete.</p>
                 <div class="hero-actions">
-                    <a href="activities.html" id="explore-activities-btn" class="btn btn-glass">Explore Activities</a>
-                    <a href="flashcard.html" id="practice-flashcards-btn" class="btn btn-glass">Practice with Flashcards</a>
+                    <a href="/activities" id="explore-activities-btn" class="btn btn-glass">Explore Activities</a>
+                    <a href="/flashcard" id="practice-flashcards-btn" class="btn btn-glass">Practice with Flashcards</a>
                 </div>
             `;
         }
@@ -818,11 +820,11 @@ document.addEventListener('DOMContentLoaded', () => {
         updateNav();
         setupModalEvents();
         
-        const isProtectedPage = path === 'activities.html' || path === 'flashcard.html';
+        const isProtectedPage = path === '/activities' || path === '/flashcard';
         
         if (isProtectedPage && !currentUser) {
             sessionStorage.setItem('redirectUrl', path);
-            window.location.href = 'index.html';
+            window.location.href = '/';
             return;
         }
 
@@ -833,13 +835,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        document.querySelectorAll('a[href="activities.html"], a[href="flashcard.html"]').forEach(link => {
+        document.querySelectorAll('a[href="/activities"], a[href="/flashcard"]').forEach(link => {
             link.addEventListener('click', handleProtectedLink);
         });
 
-        if (path === 'activities.html') {
+        if (path === '/activities') {
             initActivitiesPage();
-        } else if (path === 'flashcard.html') {
+        } else if (path === '/flashcard') {
             initFlashcardPage();
         } else {
             initHomePage();
