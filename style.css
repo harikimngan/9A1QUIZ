@@ -165,7 +165,30 @@ nav {
     transform: scale(1);
 }
 
-.hamburger { display: none; }
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 110;
+    padding: 0.5rem;
+}
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--text-light);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
 
 /* --- MAIN CONTENT & LAYOUT --- */
 main {
@@ -888,12 +911,60 @@ input[type="radio"]:checked::before {
 
 /* --- RESPONSIVENESS --- */
 @media (max-width: 900px) {
-    nav { grid-template-columns: auto 1fr auto; }
-    .nav-links { display: none; }
-    .hamburger { display: block; /* Styles to make it visible */ }
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding-top: 5rem;
+        background: rgba(30, 0, 51, 0.95);
+        backdrop-filter: blur(15px);
+        
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        z-index: 105;
+
+        display: flex;
+    }
+
+    .nav-links.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-link {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+
+    .nav-auth #login-btn,
+    .nav-auth #signup-btn {
+        display: none;
+    }
+
     .members-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
     .about-content { padding: 2rem; }
 }
+
 @media (max-width: 768px) {
     #flashcard-page { flex-direction: column; align-items: center; }
     .flashcard-panel { max-width: 100%; width: 100%; }
