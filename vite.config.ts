@@ -1,3 +1,5 @@
+/// <reference types="node" />
+/// <reference types="vite/client" />
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 // FIX: Import to define __dirname in ES module scope.
@@ -22,6 +24,17 @@ export default defineConfig(({ mode }) => {
         alias: {
           // FIX: Use ES module-compatible __dirname for path aliasing.
           '@': path.resolve(__dirname, '.'),
+        }
+      },
+      // Ensure all top-level HTML pages are built (multi-page app)
+      build: {
+        rollupOptions: {
+          input: {
+            index: path.resolve(__dirname, 'index.html'),
+            activities: path.resolve(__dirname, 'activities.html'),
+            flashcard: path.resolve(__dirname, 'flashcard.html'),
+            about: path.resolve(__dirname, 'about.html'),
+          }
         }
       }
     };
