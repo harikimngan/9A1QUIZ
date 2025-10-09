@@ -36,6 +36,7 @@ export default defineConfig(({ mode }) => {
             about: path.resolve(__dirname, 'about.html'),
           }
         }
-      }
+      },
+      publicDir: path.resolve(__dirname, '.')
     };
 });
