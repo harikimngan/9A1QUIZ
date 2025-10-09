@@ -689,6 +689,50 @@ input[type="radio"]:checked::before {
 }
 .mc-options input[type="radio"] { width: auto; margin-right: 0.5rem; }
 
+/* --- TEACHER DASHBOARD --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+}
+.stat-card {
+    background: var(--surface-light);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-light);
+}
+.stat-label {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+.top-students {
+    background: var(--surface-light);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+}
+.top-students h3 { margin-bottom: 0.75rem; }
+.top-list { list-style: none; display: grid; gap: 0.5rem; }
+.top-list li { display: flex; justify-content: space-between; }
+.top-list .name { font-weight: 700; }
+.top-list .meta { color: var(--text-muted); font-weight: 600; }
+.empty-subtle { color: var(--text-muted); font-style: italic; }
+
+@media (max-width: 900px) {
+  .dashboard-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+}
+
 
 /* --- QUIZ PLAYER MODAL --- */
 #quiz-player-modal .quiz-player-content {

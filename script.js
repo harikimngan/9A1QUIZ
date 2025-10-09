@@ -369,6 +369,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('add-question-btn').addEventListener('click', addQuestionBlock);
         document.getElementById('create-quiz-form').addEventListener('submit', handleCreateQuiz);
         addQuestionBlock(); // Add the first question block by default
+
+        // Teacher dashboard below list
+        renderTeacherDashboard();
     };
 
     const addQuestionBlock = () => {
@@ -475,6 +478,77 @@ document.addEventListener('DOMContentLoaded', () => {
         const total = userScoreData.attempts[0].totalGradable;
         return `${maxScore} / ${total}`;
     };
+
+    // --- TEACHER DASHBOARD ---
+    function computeTeacherStats(quizzes, teacherName) {
+        const teacherQuizzes = quizzes.filter(q => q.teacherName === teacherName);
+        const numQuizzes = teacherQuizzes.length;
+        let totalAttempts = 0;
+        let totalCorrect = 0;
+        let totalGradable = 0;
+
+        const studentTotals = new Map(); // username -> { attempts, totalScore, totalGradable }
+
+        for (const quiz of teacherQuizzes) {
+            for (const entry of quiz.scores || []) {
+                const attempts = entry.attempts || [];
+                totalAttempts += attempts.length;
+                for (const att of attempts) {
+                    totalCorrect += att.score || 0;
+                    totalGradable += att.totalGradable || 0;
+                }
+                const prev = studentTotals.get(entry.username) || { attempts: 0, totalScore: 0, totalGradable: 0 };
+                prev.attempts += attempts.length;
+                for (const att of attempts) {
+                    prev.totalScore += att.score || 0;
+                    prev.totalGradable += att.totalGradable || 0;
+                }
+                studentTotals.set(entry.username, prev);
+            }
+        }
+
+        const avgAccuracy = totalGradable > 0 ? Math.round((totalCorrect / totalGradable) * 100) : 0;
+        const topStudents = Array.from(studentTotals.entries())
+            .map(([username, v]) => ({ username, attempts: v.attempts, accuracy: v.totalGradable > 0 ? Math.round((v.totalScore / v.totalGradable) * 100) : 0 }))
+            .sort((a, b) => b.accuracy - a.accuracy || b.attempts - a.attempts)
+            .slice(0, 5);
+
+        return { numQuizzes, totalAttempts, avgAccuracy, topStudents };
+    }
+
+    function renderTeacherDashboard() {
+        const section = document.getElementById('teacher-dashboard');
+        if (!section) return;
+        const quizzes = getFromLS('quizzes') || [];
+        const { numQuizzes, totalAttempts, avgAccuracy, topStudents } = computeTeacherStats(quizzes, currentUser.username);
+
+        section.classList.remove('hidden');
+        section.innerHTML = `
+            <h2 style="margin-top:2rem;">Dashboard</h2>
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-value">${numQuizzes}</div>
+                    <div class="stat-label">Quizzes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${totalAttempts}</div>
+                    <div class="stat-label">Total Attempts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${avgAccuracy}%</div>
+                    <div class="stat-label">Average Accuracy</div>
+                </div>
+            </div>
+            <div class="top-students">
+                <h3>Top Students</h3>
+                ${topStudents.length === 0 ? `<p class="empty-subtle">No attempts yet.</p>` : `
+                    <ul class="top-list">
+                        ${topStudents.map(s => `<li><span class="name">${s.username}</span><span class="meta">${s.accuracy}% • ${s.attempts} attempts</span></li>`).join('')}
+                    </ul>
+                `}
+            </div>
+        `;
+    }
 
     const renderStudentView = (container) => {
         const quizzes = getFromLS('quizzes');
