@@ -1,9 +1,0 @@
-{
-  "routes": [
-    { "src": "/(.*\\.(css|js|png|jpg|svg|ico))", "dest": "/$1" },
-    { "src": "/about", "dest": "/about.html" },
-    { "src": "/activities", "dest": "/activities.html" },
-    { "src": "/flashcard", "dest": "/flashcard.html" },
-    { "src": "/", "dest": "/index.html" }
-  ]
-}
