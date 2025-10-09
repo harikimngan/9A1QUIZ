@@ -34,6 +34,11 @@ body {
     line-height: 1.6;
 }
 
+/* Prevent background scroll when mobile nav is open */
+body.nav-open {
+    overflow: hidden;
+}
+
 .background-effects {
     position: fixed;
     top: 0;
@@ -64,7 +69,7 @@ header {
     border-bottom: 1px solid var(--border-light);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200; /* keep above hero */
 }
 
 nav {
@@ -924,7 +929,7 @@ input[type="radio"]:checked::before {
         width: 100%;
         height: 100%;
         padding-top: 5rem;
-        background: rgba(30, 0, 51, 0.95);
+        background: rgba(30, 0, 51, 0.96);
         backdrop-filter: blur(15px);
         
         flex-direction: column;
@@ -934,9 +939,9 @@ input[type="radio"]:checked::before {
 
         opacity: 0;
         visibility: hidden;
-        transform: translateY(-20px);
+        transform: translateY(-10px);
         transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-        z-index: 105;
+        z-index: 9999; /* above page content */
 
         display: flex;
     }

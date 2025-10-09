@@ -861,6 +861,18 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger?.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
+        document.body.classList.toggle('nav-open');
+    });
+
+    // Close mobile menu when a nav link is clicked
+    document.querySelectorAll('.nav-links .nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.classList.remove('nav-open');
+            }
+        });
     });
 
     init();
