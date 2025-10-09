@@ -3,7 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- GLOBAL STATE & CONSTANTS ---
     const TEACHER_CODE = "TEACHER2025";
-    const path = window.location.pathname;
+    // Correctly handle clean URLs (e.g. /activities) vs file paths
+    let path = window.location.pathname;
+    if (path.length > 1 && path.endsWith('/')) {
+        path = path.slice(0, -1); // Normalize by removing trailing slash
+    }
+
     const MALE_AVATAR = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGZpbGw9IiNjNzdkZmYiIGQ9Ik00ODAtODBxLTEzNCAwLTIyNy05M3QtOTMtMjI3cTAtMTM0IDkzLTIyN3QyMjctOTNxMTM0IDAgMjI3IDkzdDkzIDIyN3EwIDEzNC05MyAyMjd0LTIyNyA5M1ptMC0zMjBxLTY2IDAtMTEzLTQ3dC00Ny0xMTNxMC02NiA0Ny0xMTN0MTEzLTQ3cTY2IDAgMTEzIDQ3dDQ3IDExM3EwIDY2LTQ3IDExM3QtMTEzIDQ3Wm0wIDI0MHE4MyAwIDE1Ni0zMS41VDc2My0zNDBxLTU0LTU0LTEyNy04M3QtMTU2LTI5cS04MyAwLTE1NiAyOXQtMTI3IDgzcTQ3IDYyIDEyMCA5My41VDQ4MC04MFoiLz48L3N2Zz4=`;
     const FEMALE_AVATAR = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIiB3aWR0aD0iMjQiPjxwYXRoIGZpbGw9IiNjNzdkZmYiIGQ9Ik00ODAtODBxLTEzNCAwLTIyNy05M3QtOTMtMjI3di04MHEwLTI1IDcuNS00Mi41VDMwLTYwdi0xMjBxMC0yNSAxNy41LTQyLjVUMzIwLTcyMGgzMjBxMjUgMCA0Mi41IDE3LjVUNzAwLTY2MHYxMjBoNDBxMjUgMCA0Mi41IDE3LjVUNDgwLTQ4MHY4MHEwIDEzNC05MyAyMjd0LTIyNyA5M1ptMC00ODBRLTY2IDAtMTEzLTQ3dC00Ny0xMTNxMC02NiA0Ny0xMTN0MTEzLTQ3cTY2IDAgMTEzIDQ3dDQ3IDExM3EwIDY2LTQ3IDExM3QtMTEzIDQ3WiIvPjwvc3ZnPg==`;
     
@@ -76,9 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update active link
         document.querySelectorAll('.nav-link').forEach(link => {
             const linkPath = link.getAttribute('href');
-            // Handle root path case for index.html
-            const isActive = (path === '/' && linkPath === '/') || (linkPath !== '/' && path.startsWith(linkPath));
-            if (isActive) {
+            if (linkPath === path) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
@@ -694,7 +697,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let userFlashcards = [];
 
     const initFlashcardPage = () => {
-        userFlashcards = getFromLS('flashcards')[currentUser.username] || [];
+        userFlashcards = (getFromLS('flashcards') || {})[currentUser.username] || [];
         document.getElementById('add-card-form').addEventListener('submit', handleAddCard);
         document.getElementById('reset-cards').addEventListener('click', handleResetCards);
         document.getElementById('next-card').addEventListener('click', navigateCards.bind(null, 1));
