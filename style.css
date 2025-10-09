@@ -689,6 +689,38 @@ input[type="radio"]:checked::before {
 }
 .mc-options input[type="radio"] { width: auto; margin-right: 0.5rem; }
 
+/* Theme the MC option inputs to match site colors */
+.question-block .mc-options > div {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+.question-block .mc-options input[type="text"],
+.question-block input.question-text {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: #10001c;
+    border: 1px solid #4a1f6e;
+    border-radius: 12px;
+    color: var(--text-light);
+    font-size: 1rem;
+}
+.question-block .mc-options input[type="text"]::placeholder,
+.question-block input.question-text::placeholder {
+    color: var(--text-muted);
+}
+.question-block .mc-options input[type="text"]:focus,
+.question-block input.question-text:focus {
+    outline: none;
+    border-color: var(--purple-light);
+    box-shadow: 0 0 0 3px var(--purple-glow);
+}
+/* Use theme color for radios (for browsers supporting accent-color) */
+.question-block .mc-options input[type="radio"] {
+    accent-color: var(--purple-light);
+}
+
 /* --- TEACHER DASHBOARD --- */
 .dashboard-grid {
     display: grid;
