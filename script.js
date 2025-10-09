@@ -817,6 +817,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const init = () => {
         updateNav();
         setupModalEvents();
+        // Admin export/import panel when URL has ?admin=1
+        try {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('admin') === '1') {
+                injectAdminDataPanel();
+            }
+        } catch (_) {}
         
         const isProtectedPage = path === 'activities.html' || path === 'flashcard.html';
         
@@ -858,3 +865,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
+// --- ADMIN DATA UTILITIES (Export / Import) ---
+function injectAdminDataPanel() {
+    const panel = document.createElement('div');
+    panel.style.position = 'fixed';
+    panel.style.bottom = '16px';
+    panel.style.right = '16px';
+    panel.style.zIndex = '9999';
+    panel.style.display = 'flex';
+    panel.style.gap = '8px';
+    panel.style.background = 'rgba(0,0,0,0.6)';
+    panel.style.padding = '8px';
+    panel.style.borderRadius = '8px';
+    panel.style.backdropFilter = 'blur(6px)';
+
+    const exportBtn = document.createElement('button');
+    exportBtn.textContent = 'Export Data';
+    exportBtn.className = 'btn btn-secondary';
+    exportBtn.style.cursor = 'pointer';
+    exportBtn.onclick = () => {
+        try {
+            const payload = {
+                users: localStorage.getItem('users'),
+                quizzes: localStorage.getItem('quizzes'),
+                flashcards: localStorage.getItem('flashcards'),
+                currentUser: localStorage.getItem('currentUser')
+            };
+            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `9a1-quiz-data-${new Date().toISOString().slice(0,19)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        } catch (e) {
+            alert('Export failed: ' + e.message);
+        }
+    };
+
+    const importBtn = document.createElement('button');
+    importBtn.textContent = 'Import Data';
+    importBtn.className = 'btn btn-primary';
+    importBtn.style.cursor = 'pointer';
+    importBtn.onclick = async () => {
+        try {
+            const json = prompt('Paste exported JSON here:');
+            if (!json) return;
+            const data = JSON.parse(json);
+            if (typeof data !== 'object' || data === null) throw new Error('Invalid JSON');
+            if ('users' in data && data.users !== null) localStorage.setItem('users', data.users);
+            if ('quizzes' in data && data.quizzes !== null) localStorage.setItem('quizzes', data.quizzes);
+            if ('flashcards' in data && data.flashcards !== null) localStorage.setItem('flashcards', data.flashcards);
+            if ('currentUser' in data && data.currentUser !== null) localStorage.setItem('currentUser', data.currentUser);
+            alert('Import successful. The page will reload.');
+            location.reload();
+        } catch (e) {
+            alert('Import failed: ' + e.message);
+        }
+    };
+
+    panel.appendChild(exportBtn);
+    panel.appendChild(importBtn);
+    document.body.appendChild(panel);
+}
