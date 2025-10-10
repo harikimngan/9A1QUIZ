@@ -253,6 +253,113 @@ main {
     padding-top: 2rem;
 }
 
+/* --- HELP PAGE --- */
+.help-main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2rem;
+}
+
+.help-content {
+    background: var(--surface-light);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 2rem 3rem 3rem;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    animation: fadeIn 0.5s ease-in-out forwards;
+    text-align: left;
+}
+
+.help-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--purple-light);
+}
+
+.help-header h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--text-light);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    margin: 0;
+}
+
+.help-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.help-section {
+    background: var(--surface-dark);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+}
+
+.help-section h2 {
+    font-size: 1.5rem;
+    color: var(--purple-light);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 0.5rem;
+}
+
+.help-section h3 {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin: 1.5rem 0 0.75rem 0;
+}
+
+.help-text {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.help-text p {
+    margin-bottom: 1rem;
+}
+
+.help-text ol, .help-text ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.help-text li {
+    margin-bottom: 0.5rem;
+}
+
+.help-text ol li {
+    list-style-type: decimal;
+}
+
+.help-text ul li {
+    list-style-type: disc;
+}
+
+@media (max-width: 768px) {
+    .help-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .help-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .help-section {
+        padding: 1rem;
+    }
+}
+
 .about-content {
     background: var(--surface-light);
     backdrop-filter: blur(10px);

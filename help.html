@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9A1 Quiz – Help & Guide</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-effects"></div>
+    <div id="app-container">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">9A1 Quiz</a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">🏠 Home</a></li>
+                    <li><a href="activities.html" class="nav-link">📚 Activities</a></li>
+                    <li><a href="flashcard.html" class="nav-link">🃏 Flashcard</a></li>
+                    <li><a href="about.html" class="nav-link">ℹ️ About Us</a></li>
+                    <li><a href="help.html" class="nav-link active">❓ Help</a></li>
+                </ul>
+                <div class="nav-auth">
+                    <div id="user-info" class="user-info hidden">
+                        <div class="avatar-container">
+                             <img src="" alt="User Avatar" id="user-avatar" class="avatar">
+                             <button id="edit-avatar-btn" class="edit-avatar-btn" title="Edit Avatar">✏️</button>
+                        </div>
+                        <span id="username-display"></span>
+                    </div>
+                    <button id="logout-btn" class="btn btn-logout hidden">Logout</button>
+                    <button id="login-btn" class="btn btn-secondary">Login</button>
+                    <button id="signup-btn" class="btn btn-primary">Sign Up</button>
+                </div>
+                 <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </header>
+
+        <main class="help-main">
+            <div class="help-content">
+                <div class="help-header">
+                    <h1 data-en="Help & User Guide" data-vi="Hướng dẫn sử dụng">Help & User Guide</h1>
+                    <button id="translate-btn" class="btn btn-secondary">Tiếng Việt</button>
+                </div>
+                
+                <div class="help-sections">
+                    <section class="help-section">
+                        <h2 data-en="Getting Started" data-vi="Bắt đầu">Getting Started</h2>
+                        <div class="help-text">
+                            <p data-en="Welcome to 9A1 Quiz! This platform allows teachers to create quizzes and students to practice with flashcards and take quizzes." data-vi="Chào mừng đến với 9A1 Quiz! Nền tảng này cho phép giáo viên tạo bài kiểm tra và học sinh thực hành với thẻ ghi nhớ và làm bài kiểm tra.">Welcome to 9A1 Quiz! This platform allows teachers to create quizzes and students to practice with flashcards and take quizzes.</p>
+                        </div>
+                    </section>
+
+                    <section class="help-section">
+                        <h2 data-en="For Teachers" data-vi="Dành cho giáo viên">For Teachers</h2>
+                        <div class="help-text">
+                            <h3 data-en="Creating an Account" data-vi="Tạo tài khoản">Creating an Account</h3>
+                            <ol>
+                                <li data-en="Click 'Sign Up' in the top navigation" data-vi="Nhấp 'Sign Up' trong thanh điều hướng phía trên">Click 'Sign Up' in the top navigation</li>
+                                <li data-en="Select 'Teacher' as your role" data-vi="Chọn 'Teacher' làm vai trò của bạn">Select 'Teacher' as your role</li>
+                                <li data-en="Enter the teacher code: TEACHER2025" data-vi="Nhập mã giáo viên: TEACHER2025">Enter the teacher code: TEACHER2025</li>
+                                <li data-en="Fill in your username, password, and select your avatar" data-vi="Điền tên người dùng, mật khẩu và chọn avatar của bạn">Fill in your username, password, and select your avatar</li>
+                            </ol>
+
+                            <h3 data-en="Creating Quizzes" data-vi="Tạo bài kiểm tra">Creating Quizzes</h3>
+                            <ol>
+                                <li data-en="Log in and go to Activities page" data-vi="Đăng nhập và vào trang Activities">Log in and go to Activities page</li>
+                                <li data-en="Scroll down to 'Create a New Quiz' section" data-vi="Cuộn xuống phần 'Create a New Quiz'">Scroll down to 'Create a New Quiz' section</li>
+                                <li data-en="Enter your quiz title" data-vi="Nhập tiêu đề bài kiểm tra">Enter your quiz title</li>
+                                <li data-en="Add questions using 'Add Question' button" data-vi="Thêm câu hỏi bằng nút 'Add Question'">Add questions using 'Add Question' button</li>
+                                <li data-en="For multiple choice: enter options and select the correct answer" data-vi="Đối với trắc nghiệm: nhập các lựa chọn và chọn đáp án đúng">For multiple choice: enter options and select the correct answer</li>
+                                <li data-en="Click 'Create Quiz' when done" data-vi="Nhấp 'Create Quiz' khi hoàn thành">Click 'Create Quiz' when done</li>
+                            </ol>
+
+                            <h3 data-en="Viewing Student Progress" data-vi="Xem tiến độ học sinh">Viewing Student Progress</h3>
+                            <p data-en="Check the Dashboard section on the Activities page to see:" data-vi="Kiểm tra phần Dashboard trên trang Activities để xem:">Check the Dashboard section on the Activities page to see:</p>
+                            <ul>
+                                <li data-en="Number of quizzes created" data-vi="Số bài kiểm tra đã tạo">Number of quizzes created</li>
+                                <li data-en="Total student attempts" data-vi="Tổng số lần làm bài của học sinh">Total student attempts</li>
+                                <li data-en="Average accuracy rate" data-vi="Tỷ lệ chính xác trung bình">Average accuracy rate</li>
+                                <li data-en="Top performing students" data-vi="Học sinh có thành tích tốt nhất">Top performing students</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="help-section">
+                        <h2 data-en="For Students" data-vi="Dành cho học sinh">For Students</h2>
+                        <div class="help-text">
+                            <h3 data-en="Creating an Account" data-vi="Tạo tài khoản">Creating an Account</h3>
+                            <ol>
+                                <li data-en="Click 'Sign Up' in the top navigation" data-vi="Nhấp 'Sign Up' trong thanh điều hướng phía trên">Click 'Sign Up' in the top navigation</li>
+                                <li data-en="Select 'Student' as your role" data-vi="Chọn 'Student' làm vai trò của bạn">Select 'Student' as your role</li>
+                                <li data-en="Fill in your username, password, and select your avatar" data-vi="Điền tên người dùng, mật khẩu và chọn avatar của bạn">Fill in your username, password, and select your avatar</li>
+                            </ol>
+
+                            <h3 data-en="Taking Quizzes" data-vi="Làm bài kiểm tra">Taking Quizzes</h3>
+                            <ol>
+                                <li data-en="Log in and go to Activities page" data-vi="Đăng nhập và vào trang Activities">Log in and go to Activities page</li>
+                                <li data-en="Browse available quizzes created by teachers" data-vi="Duyệt các bài kiểm tra có sẵn do giáo viên tạo">Browse available quizzes created by teachers</li>
+                                <li data-en="Click 'Start Quiz' on any quiz" data-vi="Nhấp 'Start Quiz' trên bất kỳ bài kiểm tra nào">Click 'Start Quiz' on any quiz</li>
+                                <li data-en="Answer questions and click 'Next' to proceed" data-vi="Trả lời câu hỏi và nhấp 'Next' để tiếp tục">Answer questions and click 'Next' to proceed</li>
+                                <li data-en="View your results at the end" data-vi="Xem kết quả của bạn ở cuối">View your results at the end</li>
+                            </ol>
+
+                            <h3 data-en="Using Flashcards" data-vi="Sử dụng thẻ ghi nhớ">Using Flashcards</h3>
+                            <ol>
+                                <li data-en="Go to the Flashcard page" data-vi="Vào trang Flashcard">Go to the Flashcard page</li>
+                                <li data-en="Add new cards using the form on the right" data-vi="Thêm thẻ mới bằng biểu mẫu bên phải">Add new cards using the form on the right</li>
+                                <li data-en="Click on cards to flip them and see the answer" data-vi="Nhấp vào thẻ để lật chúng và xem câu trả lời">Click on cards to flip them and see the answer</li>
+                                <li data-en="Use Previous/Next buttons to navigate" data-vi="Sử dụng nút Previous/Next để điều hướng">Use Previous/Next buttons to navigate</li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <section class="help-section">
+                        <h2 data-en="Tips & Best Practices" data-vi="Mẹo và thực hành tốt nhất">Tips & Best Practices</h2>
+                        <div class="help-text">
+                            <h3 data-en="For Teachers" data-vi="Dành cho giáo viên">For Teachers</h3>
+                            <ul>
+                                <li data-en="Create clear, concise questions" data-vi="Tạo câu hỏi rõ ràng, súc tích">Create clear, concise questions</li>
+                                <li data-en="Use multiple choice for quick assessment" data-vi="Sử dụng trắc nghiệm để đánh giá nhanh">Use multiple choice for quick assessment</li>
+                                <li data-en="Add essay questions for deeper thinking" data-vi="Thêm câu hỏi tự luận để suy nghĩ sâu hơn">Add essay questions for deeper thinking</li>
+                                <li data-en="Monitor student progress regularly" data-vi="Theo dõi tiến độ học sinh thường xuyên">Monitor student progress regularly</li>
+                            </ul>
+
+                            <h3 data-en="For Students" data-vi="Dành cho học sinh">For Students</h3>
+                            <ul>
+                                <li data-en="Take quizzes multiple times to improve" data-vi="Làm bài kiểm tra nhiều lần để cải thiện">Take quizzes multiple times to improve</li>
+                                <li data-en="Use flashcards for memorization" data-vi="Sử dụng thẻ ghi nhớ để ghi nhớ">Use flashcards for memorization</li>
+                                <li data-en="Review your answers after each quiz" data-vi="Xem lại câu trả lời sau mỗi bài kiểm tra">Review your answers after each quiz</li>
+                                <li data-en="Practice regularly for best results" data-vi="Thực hành thường xuyên để có kết quả tốt nhất">Practice regularly for best results</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="help-section">
+                        <h2 data-en="Need More Help?" data-vi="Cần thêm trợ giúp?">Need More Help?</h2>
+                        <div class="help-text">
+                            <p data-en="If you encounter any issues or have questions, please contact your teacher or the development team." data-vi="Nếu bạn gặp bất kỳ vấn đề nào hoặc có câu hỏi, vui lòng liên hệ với giáo viên hoặc nhóm phát triển.">If you encounter any issues or have questions, please contact your teacher or the development team.</p>
+                            <p data-en="This platform is designed to make learning interactive and engaging. Enjoy your quiz experience!" data-vi="Nền tảng này được thiết kế để làm cho việc học trở nên tương tác và hấp dẫn. Chúc bạn có trải nghiệm làm bài kiểm tra thú vị!">This platform is designed to make learning interactive and engaging. Enjoy your quiz experience!</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="signup">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="modal-form">
+                <h2>Welcome Back!</h2>
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <p id="login-error" class="error-message"></p>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signup-form" class="modal-form hidden">
+                 <h2>Create an Account</h2>
+                <div class="form-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" required>
+                </div>
+                <div class="form-group">
+                    <label>Account Type</label>
+                    <div class="role-selector">
+                        <div class="role-option">
+                            <label for="role-student">Student</label>
+                            <input type="radio" id="role-student" name="role" value="student" checked>
+                        </div>
+                        <div class="role-option">
+                            <label for="role-teacher">Teacher</label>
+                            <input type="radio" id="role-teacher" name="role" value="teacher">
+                        </div>
+                    </div>
+                </div>
+                <div id="teacher-code-group" class="form-group hidden">
+                    <label for="teacher-code">Teacher Code</label>
+                    <input type="password" id="teacher-code" placeholder="Enter teacher code: TEACHER2025">
+                </div>
+                <div class="form-group">
+                    <label>Select Your Avatar</label>
+                    <div class="gender-selector">
+                        <label>
+                            <input type="radio" name="gender" value="male" checked>
+                            <div class="gender-option" id="gender-option-male">
+                                <img src="" alt="Male Avatar Preview" class="gender-avatar-preview">
+                                <span>Male</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female">
+                            <div class="gender-option" id="gender-option-female">
+                                <img src="" alt="Female Avatar Preview" class="gender-avatar-preview">
+                                <span>Female</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <p id="signup-error" class="error-message"></p>
+                <button type="submit" class="btn btn-primary btn-full">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Gender Edit Modal -->
+    <div id="gender-edit-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-gender">&times;</button>
+            <form id="gender-edit-form">
+                <h2>Change Your Avatar</h2>
+                 <div class="form-group">
+                    <label>Select Your Avatar</label>
+                    <div class="gender-selector">
+                        <label>
+                            <input type="radio" name="edit-gender" value="male">
+                            <div class="gender-option" id="edit-gender-option-male">
+                                <img src="" alt="Male Avatar Preview" class="gender-avatar-preview">
+                                <span>Male</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input type="radio" name="edit-gender" value="female">
+                            <div class="gender-option" id="edit-gender-option-female">
+                                <img src="" alt="Female Avatar Preview" class="gender-avatar-preview">
+                                <span>Female</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <script type="module" src="/script.js"></script>
+    <script>
+        // Translation functionality
+        let currentLang = 'en';
+        const translateBtn = document.getElementById('translate-btn');
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'vi' : 'en';
+            updateLanguage();
+        }
+        
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-en][data-vi]');
+            elements.forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
+            });
+            
+            translateBtn.textContent = currentLang === 'en' ? 'Tiếng Việt' : 'English';
+        }
+        
+        translateBtn.addEventListener('click', toggleLanguage);
+    </script>
+</body>
+</html>

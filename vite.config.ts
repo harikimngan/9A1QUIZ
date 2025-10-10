@@ -34,6 +34,7 @@ export default defineConfig(({ mode }) => {
             activities: path.resolve(__dirname, 'activities.html'),
             flashcard: path.resolve(__dirname, 'flashcard.html'),
             about: path.resolve(__dirname, 'about.html'),
+            help: path.resolve(__dirname, 'help.html'),
           }
         }
       },
