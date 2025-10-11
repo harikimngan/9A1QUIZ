@@ -952,6 +952,68 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
 });
 
+// --- CLASS JOIN / CREATE (local placeholder until Supabase is wired) ---
+// Keep minimal: classes stored in localStorage under 'classes'
+const getClasses = () => JSON.parse(localStorage.getItem('classes') || '[]');
+const saveClasses = (c) => localStorage.setItem('classes', JSON.stringify(c));
+
+document.addEventListener('DOMContentLoaded', () => {
+    const enterBtn = document.getElementById('enter-class-btn');
+    const createBtn = document.getElementById('create-class-btn');
+    const codeInput = document.getElementById('class-code-input');
+
+    // reflect login state
+    const refreshAuthUI = () => {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        if (!enterBtn || !createBtn) return;
+        enterBtn.disabled = !currentUser;
+        // show create button only for teacher role
+        if (currentUser && currentUser.role === 'teacher') {
+            createBtn.classList.remove('hidden');
+        } else {
+            createBtn.classList.add('hidden');
+        }
+    };
+
+    // join class by code
+    enterBtn?.addEventListener('click', () => {
+        const code = codeInput?.value.trim().toUpperCase();
+        if (!code) return showToast('Please enter a class code.', 'error');
+        const classes = getClasses();
+        const found = classes.find(c => c.code === code);
+        if (!found) return showToast('Class not found.', 'error');
+        // require login
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        if (!currentUser) return openModal('auth-modal');
+        // join: record membership in localStorage
+        const members = JSON.parse(localStorage.getItem('class_members') || '[]');
+        if (!members.find(m => m.classId === found.id && m.user === currentUser.username)) {
+            members.push({ classId: found.id, user: currentUser.username, joinedAt: new Date().toISOString() });
+            localStorage.setItem('class_members', JSON.stringify(members));
+        }
+        showToast(`Joined class ${found.title || found.code}`, 'success');
+        // redirect to activities (or class page) optionally
+    });
+
+    // create class (teacher)
+    createBtn?.addEventListener('click', () => {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        if (!currentUser) return openModal('auth-modal');
+        if (currentUser.role !== 'teacher') return showToast('Only teachers can create classes', 'error');
+        const code = generateId();
+        const classes = getClasses();
+        const newClass = { id: generateId().toLowerCase(), code: code, title: `Class ${code}`, teacher: currentUser.username, createdAt: new Date().toISOString() };
+        classes.push(newClass);
+        saveClasses(classes);
+        showToast(`Class created: ${code}`, 'success');
+    });
+
+    // initial state
+    refreshAuthUI();
+    // refresh on storage changes (e.g., login/logout in other tabs)
+    window.addEventListener('storage', refreshAuthUI);
+});
+
 // --- ADMIN DATA UTILITIES (Export / Import) ---
 function injectAdminDataPanel() {
     const panel = document.createElement('div');
