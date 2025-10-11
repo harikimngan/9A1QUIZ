@@ -1250,59 +1250,62 @@ input[type="radio"]:checked::before {
   }
 }
 
-/* 🟪 Enhanced Help Page Styles */
+/* 🟪 Enhanced Help Page Styles (use darker purple, avoid blue) */
 .help-main {
-  min-height: 100vh;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    /* use site purple palette instead of blue to keep colors consistent */
+    background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-main) 100%);
 }
 
 .help-content {
-  max-width: 1000px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 3rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
 }
 
 .help-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 2px solid #e0e7ff;
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--purple-light);
 }
 
 .help-header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    /* darker purple gradient for the headline */
+    background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .help-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
 }
 
 .help-section {
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 15px;
-  padding: 2rem;
-  border-left: 4px solid #667eea;
-  transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 2rem;
+    /* use a darker purple accent instead of blue */
+    border-left: 4px solid var(--purple-dark);
+    transition: all 0.3s ease;
 }
 
 .help-section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(138, 43, 226, 0.12); /* purple glow */
 }
 
 .help-section h2 {
@@ -1321,17 +1324,17 @@ input[type="radio"]:checked::before {
 }
 
 .help-section h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #475569;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-dark);
   margin: 1.5rem 0 1rem 0;
   padding-left: 1rem;
-  border-left: 3px solid #667eea;
+    border-left: 3px solid var(--purple-main);
 }
 
 .help-text {
-  line-height: 1.7;
-  color: #475569;
+    line-height: 1.7;
+    color: var(--text-dark);
 }
 
 .help-text p {
@@ -1351,18 +1354,18 @@ input[type="radio"]:checked::before {
 
 /* 🟪 Enhanced Translate Button */
 #translate-btn {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.25);
 }
 
 #translate-btn:hover {

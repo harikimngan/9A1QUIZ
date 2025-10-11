@@ -11,6 +11,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
+      // When deploying to GitHub Pages under a repo (e.g. https://harikimngan.github.io/9A1QUIZ/)
+      // set base to the repo name. If you deploy to a custom domain or root, change accordingly.
+      base: '/9A1QUIZ/',
       server: {
         port: 3000,
         host: '0.0.0.0',
