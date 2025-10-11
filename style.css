@@ -96,8 +96,9 @@ nav {
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-    flex: 1;
-    max-width: 600px;
+    flex: 1 1 auto;
+    /* allow nav to expand so all links (including Help) are visible */
+    max-width: none;
 }
 
 .nav-link {
