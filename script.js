@@ -303,6 +303,47 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Signup-create-class button (available inside signup form when role=teacher)
+        const createClassSignupBtn = document.getElementById('create-class-signup-btn');
+        const signupClassCodeDisplay = document.getElementById('signup-class-code-display');
+        if (createClassSignupBtn) {
+            createClassSignupBtn.addEventListener('click', () => {
+                // ensure classes list exists
+                if (!getFromLS('classes')) saveToLS('classes', []);
+                const classes = getFromLS('classes') || [];
+                const classCode = generateId();
+                const draftClass = {
+                    id: generateId(),
+                    code: classCode,
+                    title: `New Class`,
+                    teacher: null, // not tied to an account yet
+                    createdAt: new Date().toISOString(),
+                    members: []
+                };
+                classes.push(draftClass);
+                saveToLS('classes', classes);
+
+                // Display code in the signup form and provide copy button
+                if (signupClassCodeDisplay) {
+                    signupClassCodeDisplay.innerHTML = '';
+                    const codeEl = document.createElement('span');
+                    codeEl.textContent = classCode;
+                    codeEl.style.marginRight = '8px';
+                    signupClassCodeDisplay.appendChild(codeEl);
+
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'btn btn-secondary';
+                    copyBtn.textContent = 'Copy';
+                    copyBtn.style.padding = '0.3rem 0.6rem';
+                    copyBtn.addEventListener('click', async () => {
+                        try { await navigator.clipboard.writeText(classCode); showToast('Copied class code', 'success'); }
+                        catch (err) { showToast('Copy failed', 'error'); }
+                    });
+                    signupClassCodeDisplay.appendChild(copyBtn);
+                }
+            });
+        }
+
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const tab = btn.dataset.tab;
