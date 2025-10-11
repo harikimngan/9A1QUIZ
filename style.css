@@ -1231,3 +1231,191 @@ input[type="radio"]:checked::before {
                  0 0 40px rgba(179, 102, 255, 1);
   }
 }
+
+/* 🟪 Enhanced Help Page Styles */
+.help-main {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.help-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.help-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e0e7ff;
+}
+
+.help-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.help-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.help-section {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  padding: 2rem;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+}
+
+.help-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+}
+
+.help-section h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.help-section h2::before {
+  content: "📚";
+  font-size: 1.5rem;
+}
+
+.help-section h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #475569;
+  margin: 1.5rem 0 1rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid #667eea;
+}
+
+.help-text {
+  line-height: 1.7;
+  color: #475569;
+}
+
+.help-text p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.help-text ul, .help-text ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.help-text li {
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+}
+
+/* 🟪 Enhanced Translate Button */
+#translate-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+#translate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+#translate-btn:active {
+  transform: translateY(0);
+}
+
+#translate-btn.translating {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* 🟪 Loading Spinner Animation */
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 🟪 Smooth Content Transitions */
+.help-content {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.help-section {
+  transition: all 0.3s ease;
+}
+
+.help-section h2,
+.help-section h3,
+.help-text p,
+.help-text li {
+  transition: all 0.3s ease;
+}
+
+/* 🟪 Responsive Design */
+@media (max-width: 768px) {
+  .help-content {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+  
+  .help-header h1 {
+    font-size: 2rem;
+  }
+  
+  .help-section {
+    padding: 1.5rem;
+  }
+  
+  .help-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  #translate-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
