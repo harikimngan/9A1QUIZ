@@ -154,6 +154,57 @@ document.addEventListener('DOMContentLoaded', () => {
         users.push(newUser);
         saveToLS('users', users);
 
+        // If the new user is a teacher, generate an initial class and store it
+        if (role === 'teacher') {
+            // Ensure classes store exists
+            if (!getFromLS('classes')) saveToLS('classes', []);
+            const classes = getFromLS('classes') || [];
+            const classCode = generateId();
+            const newClass = {
+                id: generateId(),
+                code: classCode,
+                title: `${username}'s Class`,
+                teacher: username,
+                createdAt: new Date().toISOString(),
+                members: []
+            };
+            classes.push(newClass);
+            saveToLS('classes', classes);
+
+            // Show the teacher their generated class code prominently
+            // Use a success toast and also open the generic modal with copy option
+            showToast(`Class created: ${classCode}`, 'success');
+
+            // Create a small persistent modal-like notice to help teacher copy the code
+            const container = document.getElementById('toast-container');
+            if (container) {
+                const notice = document.createElement('div');
+                notice.className = 'toast info';
+                notice.style.display = 'flex';
+                notice.style.gap = '0.6rem';
+                notice.style.alignItems = 'center';
+                notice.innerHTML = `Your class code: <strong style="margin:0 6px;">${classCode}</strong>`;
+
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'btn btn-secondary';
+                copyBtn.textContent = 'Copy';
+                copyBtn.style.padding = '0.4rem 0.6rem';
+                copyBtn.addEventListener('click', async () => {
+                    try {
+                        await navigator.clipboard.writeText(classCode);
+                        showToast('Copied to clipboard', 'success');
+                    } catch (err) {
+                        showToast('Copy failed', 'error');
+                    }
+                });
+
+                notice.appendChild(copyBtn);
+
+                // keep this notice longer so teacher sees it
+                container.appendChild(notice);
+                setTimeout(() => { notice.remove(); }, 10000);
+            }
+        }
         form.reset(); 
         showToast('Account created! Please log in.', 'success');
 
