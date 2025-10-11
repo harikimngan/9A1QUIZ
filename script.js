@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
+        // make sure each toast hugs the right side of the container
+        toast.style.alignSelf = 'flex-end';
         toast.textContent = message;
 
         container.appendChild(toast);
@@ -180,6 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (container) {
                 const notice = document.createElement('div');
                 notice.className = 'toast info';
+                // align this special notice to the right so it appears in the corner
+                notice.style.alignSelf = 'flex-end';
                 notice.style.display = 'flex';
                 notice.style.gap = '0.6rem';
                 notice.style.alignItems = 'center';
