@@ -1012,7 +1012,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    codeInput?.addEventListener('input', toggleEnterState);
+    let loginRequiredShown = false;
+    codeInput?.addEventListener('input', (e) => {
+        toggleEnterState();
+        const val = codeInput.value.trim();
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        // Show notice once when user begins typing and is not logged in
+        if (val.length > 0 && !currentUser && !loginRequiredShown) {
+            showToast('Login required to join', 'warning');
+            loginRequiredShown = true;
+        }
+        // reset flag when input cleared or user logged in
+        if (val.length === 0 || currentUser) {
+            loginRequiredShown = false;
+        }
+    });
     // also toggle when auth changes
     window.addEventListener('storage', toggleEnterState);
 
