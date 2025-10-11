@@ -243,6 +243,26 @@ main {
     justify-content: center;
 }
 
+/* Improve class code placeholder visibility and enter button active state */
+.class-join input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+.class-join input:focus {
+    outline: none;
+    border-color: var(--purple-light);
+    box-shadow: 0 4px 18px rgba(138,43,226,0.12);
+}
+.btn-primary[disabled] {
+    opacity: 0.6;
+    transform: none;
+    cursor: not-allowed;
+}
+.btn-primary.enabled {
+    opacity: 1;
+    box-shadow: 0 6px 18px rgba(138,43,226,0.24);
+    transform: translateY(-1px);
+}
+
 .welcome-container {
     width: 100%;
 }

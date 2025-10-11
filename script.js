@@ -995,6 +995,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // redirect to activities (or class page) optionally
     });
 
+    // enable enter button when there's input and user logged in
+    const toggleEnterState = () => {
+        const val = codeInput?.value.trim();
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        if (!enterBtn) return;
+        if (val && currentUser) {
+            enterBtn.disabled = false;
+            enterBtn.classList.add('enabled');
+        } else {
+            enterBtn.disabled = true;
+            enterBtn.classList.remove('enabled');
+        }
+    };
+
+    codeInput?.addEventListener('input', toggleEnterState);
+    // also toggle when auth changes
+    window.addEventListener('storage', toggleEnterState);
+
     // create class (teacher)
     createBtn?.addEventListener('click', () => {
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');

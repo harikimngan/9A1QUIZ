@@ -57,17 +57,18 @@
             <div class="hero-content">
                 <h1>9A1 Quiz</h1>
                 <p>Learn. Play. Compete.</p>
-                <button id="enter-class-btn" class="btn btn-primary">Enter</button>
                 <div class="hero-actions">
                     <a href="activities.html" id="explore-activities-btn" class="btn btn-glass">Explore Activities</a>
                     <a href="flashcard.html" id="practice-flashcards-btn" class="btn btn-glass">Practice with Flashcards</a>
                     <a href="about.html" class="btn btn-glass">About Us</a>
                     <a href="help.html" class="btn btn-glass">Help</a>
-                    <!-- Class join UI: requires login to enter -->
-                    <div class="class-join" style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;">
-                        <input id="class-code-input" type="text" placeholder="Enter class code" style="padding:0.6rem 0.8rem;border-radius:8px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:var(--text-light);" />
-                        <button id="create-class-btn" class="btn btn-secondary hidden" title="Teachers only">Create class</button>
-                    </div>
+                </div>
+                <!-- Class join UI: requires login to enter; placed under the slogan -->
+                <div class="class-join" style="display:flex;gap:0.5rem;align-items:center;margin-top:1rem;justify-content:center;">
+                    <input id="class-code-input" type="text" placeholder="Enter class code" style="padding:0.75rem 1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:var(--text-light);min-width:260px;" />
+                    <button id="enter-class-btn" class="btn btn-primary" disabled>Enter</button>
+                    <button id="create-class-btn" class="btn btn-secondary hidden" title="Teachers only">Create class</button>
+                </div>
                 </div>
             </div>
         </main>
