@@ -222,6 +222,11 @@ main {
     text-align: center;
 }
 
+.hero-content .class-join {
+    margin-top: 1.25rem;
+    justify-self: center;
+}
+
 .hero-content h1 {
     font-size: clamp(3rem, 10vw, 6rem);
     font-weight: 700;
@@ -244,22 +249,43 @@ main {
 }
 
 /* Improve class code placeholder visibility and enter button active state */
+.class-join {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding: 0.35rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+.class-join input {
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    padding: 0.6rem 0.8rem;
+    min-width: 220px;
+    font-weight: 600;
+}
 .class-join input::placeholder {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.55);
 }
 .class-join input:focus {
     outline: none;
-    border-color: var(--purple-light);
-    box-shadow: 0 4px 18px rgba(138,43,226,0.12);
+    box-shadow: 0 8px 30px rgba(138,43,226,0.16);
+    border-radius: 999px;
+}
+.class-join .btn-primary {
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
 }
 .btn-primary[disabled] {
-    opacity: 0.6;
-    transform: none;
+    opacity: 0.7;
     cursor: not-allowed;
+    transform: none;
 }
 .btn-primary.enabled {
     opacity: 1;
-    box-shadow: 0 6px 18px rgba(138,43,226,0.24);
+    box-shadow: 0 8px 30px rgba(138,43,226,0.24);
     transform: translateY(-1px);
 }
 
