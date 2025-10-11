@@ -10,10 +10,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
+    // Allow overriding base via env (useful to deploy to different hosts).
+    // Set env var BASE or VITE_BASE when building for GitHub Pages, e.g. '/9A1QUIZ/'.
+    const basePath = env.BASE || env.VITE_BASE || '/';
+
     return {
-      // When deploying to GitHub Pages under a repo (e.g. https://harikimngan.github.io/9A1QUIZ/)
-      // set base to the repo name. If you deploy to a custom domain or root, change accordingly.
-      base: '/9A1QUIZ/',
+      base: basePath,
       server: {
         port: 3000,
         host: '0.0.0.0',
