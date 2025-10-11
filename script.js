@@ -984,7 +984,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!found) return showToast('Class not found.', 'error');
         // require login
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-        if (!currentUser) return openModal('auth-modal');
+        if (!currentUser) {
+            showToast('Login required to join', 'warning');
+            openModal('auth-modal');
+            return;
+        }
         // join: record membership in localStorage
         const members = JSON.parse(localStorage.getItem('class_members') || '[]');
         if (!members.find(m => m.classId === found.id && m.user === currentUser.username)) {
@@ -998,9 +1002,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // enable enter button when there's input and user logged in
     const toggleEnterState = () => {
         const val = codeInput?.value.trim();
-        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
         if (!enterBtn) return;
-        if (val && currentUser) {
+        if (val) {
             enterBtn.disabled = false;
             enterBtn.classList.add('enabled');
         } else {
